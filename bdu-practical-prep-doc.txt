@@ -1,0 +1,153 @@
+
+Linux
+=============================
+
+
+JSP CRUD Example
+=============================
+Download jstl.jar and mysql-connector.jar
+Download jstl1.2.jar file
+Download mysql-connector.jar
+
+Pom.xml
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>simple-jsp-mysql-crud</groupId>
+	<artifactId>simple-jsp-mysql-crud</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<port>8080</port>
+					<path>/</path>
+				</configuration>
+			</plugin>
+		</plugins>
+
+
+	</build>
+</project>
+
+
+
+Tomcat Install
+=============================
+
+Download Tomcat as tar stract it and Configure Server properties:
+--------------------
+
+Port:
+sudo nano /opt/tomcat/conf/server.xml
+<Connector port="8080" protocol="HTTP/1.1"
+           connectionTimeout="20000"
+           redirectPort="8443" />
+
+
+
+Configure Users and Roles
+sudo nano /opt/tomcat/conf/tomcat-users.xml
+<role rolename="manager-gui"/>
+<role rolename="admin-gui"/>
+<user username="admin" password="password" roles="manager-gui,admin-gui"/>
+
+Restrict Access to the Manager and Host Manager Apps:Comment out the Valve element
+sudo nano /opt/tomcat/webapps/manager/META-INF/context.xml
+<!--
+<Valve className="org.apache.catalina.valves.RemoteAddrValve"
+       allow="127\.\d+\.\d+\.\d+|::1" />
+-->
+
+sudo nano /opt/tomcat/webapps/host-manager/META-INF/context.xml
+<!--
+<Valve className="org.apache.catalina.valves.RemoteAddrValve"
+       allow="127\.\d+\.\d+\.\d+|::1" />
+-->
+
+ 
+ 
+ 
+Start tomcat
+cd /opt/tomcat
+sudo ./bin/startup.sh
+OR
+create a service and:
+sudo systemctl restart tomcat
+
+
+
+
+
+
+
+MySql
+=============================
+=>sudo mysql -u root -p
+mysql-login
+
+=>service mysql start   
+=>systemctl status mysql
+=>service mysql stop
+
+
+
+Java
+=============================
+=>which java
+=>sudo update-alternatives --display java
+Check java
+
+=>sudo update-alternatives --config java
+Switch java version
+
+
+Install java
+--------------------------------------------------------
+Download tar file then:
+sudo tar -zxvf jdk-8u202-linux-x64.tar.gz
+mv jdk-8u202-linux-x64 java8
+
+Step 2: Set Up update-alternatives
+sudo update-alternatives --install /usr/bin/java java /opt/jdk/jdk8u202/bin/java 1
+sudo update-alternatives --install /usr/bin/javac javac /opt/jdk/jdk8u202/bin/javac 1
+java -/--version
+
+
+
+
+
+
+Remove/Uninstall java from Linux: assuming you have a Java version installed in /opt/jdk
+-----------------------------------------------------------
+Step1: Check the symbolic links:
+
+ls -l /usr/bin/java
+readlink -f /usr/bin/java
+
+ls -l /etc/alternatives/java
+readlink -f /etc/alternatives/java
+
+Step2:Remove the symbolic links:
+
+sudo rm /usr/bin/java
+sudo rm /etc/alternatives/java
+
+Step3: Remove the Java version from update-alternatives:
+sudo update-alternatives --remove java /opt/jdk/bin/java
+
+Finally Delete directory:
+sudo rm -rf /opt/jdk
+
+
+
+
