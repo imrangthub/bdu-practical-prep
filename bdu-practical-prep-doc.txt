@@ -1,6 +1,20 @@
 
-Linux
+
+
+
+spring-security-mvcapp
 =============================
+USE bdu_practical_prepdb;
+INSERT INTO `bdu_practical_prepdb`.roles_tbl (`id`, `description`, `is_deleted`, `name`) VALUES ('99999990', 'Role for Admin', '0', 'ROLE_ADMIN');
+INSERT INTO `bdu_practical_prepdb`.roles_tbl (`id`, `description`, `is_deleted`, `name`) VALUES ('99999991', 'Role for Manager', '0', 'ROLE_MANAGER');
+INSERT INTO `bdu_practical_prepdb`.roles_tbl (`id`, `description`, `is_deleted`, `name`) VALUES ('99999992', 'Role for User', '0', 'ROLE_USER');
+
+
+
+
+
+
+
 
 BlogCrud
 =============================
@@ -8,6 +22,9 @@ INSERT INTO `bdu_practical_prepdb`.`blog_post` (`id`, `category`, `post_body`, `
 
 
 
+
+
+spring-security-mvcapp
 
 
 

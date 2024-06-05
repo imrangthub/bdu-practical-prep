@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+<link th:href="@{/bootstrap4/bootstrap.css}" rel="stylesheet" />
+</head>
+<body data-new-gr-c-s-check-loaded="14.1018.0" data-gr-ext-installed="">
+	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+		<a class="navbar-brand" href="#" th:href="@{/}">Home</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarsExampleDefault"
+			aria-controls="navbarsExampleDefault" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a class="navbar-brand" href="#"
+					th:href="@{/registration/create}">Sign Up</a></li>
+			</ul>
+			<ul class="my-2 my-lg-0" sec:authorize="!isAuthenticated()">
+				<li class="nav-item"><a class="navbar-brand" href="#"
+					th:href="@{/login}">Login</a></li>
+			</ul>
+			<ul class="my-2 my-lg-0" sec:authorize="isAuthenticated()">
+				<li class="nav-item"><a class="navbar-brand" href="#"
+					th:href="@{/user/home}">User Profile</a></li>
+			</ul>
+			<ul class="my-2 my-lg-0" sec:authorize="isAuthenticated()">
+				<li class="nav-item"><a class="navbar-brand" href="#"
+					th:href="@{/logout}">Logout</a></li>
+			</ul>
+		</div>
+	</nav>
+	<main role="main">
+		<div class="jumbotron">
+			<div class="container">
+				<h4>Welcome to SpringSecurityMvcApplication</h4>
+				<a class="btn btn-lg btn-success" href="/admin/home"
+					role="button">Admin Page &raquo;</a>
+					
+						<a class="btn btn-lg btn-success" href="/manager/home"
+					role="button">Manager Page &raquo;</a>
+					
+					
+			</div>
+		</div>
+		<div class="container">
+			<!-- Example row of columns -->
+			<div class="row">
+		
+
+			</div>
+			<hr>
+		</div>
+		<!-- /container -->
+	</main>
+</body>
+</html>
