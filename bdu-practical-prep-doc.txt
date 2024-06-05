@@ -2,6 +2,14 @@
 Linux
 =============================
 
+BlogCrud
+=============================
+INSERT INTO `bdu_practical_prepdb`.`blog_post` (`id`, `category`, `post_body`, `post_image`, `post_title`) VALUES ('2', '1', 'ertertert2', 'ertert2', 'ertetert2');
+
+
+
+
+
 
 JSP CRUD Example
 =============================
@@ -38,6 +46,21 @@ Pom.xml
 
 	</build>
 </project>
+
+
+httpRequest commandline
+=============================
+Create a new book:
+curl -X POST http://localhost:8080/api/books -H "Content-Type: application/json" -d '{"name": "Book One", "type": "Fiction"}'
+Get all books:
+curl -X GET http://localhost:8080/api/books
+Get a book by ID:
+curl -X GET http://localhost:8080/api/books/1
+Update a book by ID:
+curl -X PUT http://localhost:8080/api/books/1 -H "Content-Type: application/json" -d '{"name": "Updated Book One", "type": "Non-Fiction"}'
+Delete a book by ID:
+curl -X DELETE http://localhost:8080/api/books/1
+
 
 
 

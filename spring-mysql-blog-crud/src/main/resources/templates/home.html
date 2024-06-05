@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Home | Blog</title>
+	<link th:href="@{/bootstrap4/bootstrap.css}" rel="stylesheet" />
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+		<a class="navbar-brand" href="#" th:href="@{/}">Home</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+			aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+		</div>
+	</nav>
+	<main role="main" class="mt-5 pt-4">
+		<div class="jumbotron">
+			<div class="container">
+						<h4>Welcome to Blog JPA</h4>
+				<a class="btn btn-lg btn-success" href="/blog/list" role="button">Post Manage &raquo;</a>
+				<a class="btn btn-lg btn-success" href="/blog/create-view" role="button">Add Post &raquo;</a>
+			</div>
+		</div>
+		<div class="container">
+			<!-- Example row of columns -->
+			<div class="row">
+				<div class="col-md-12" th:each="postObj : ${postList}">
+					<div class="card mb-4">
+						<div class="card-body">
+							<h5 class="card-title" th:text="${postObj.postTitle}"></h5>
+							<p class="card-text" th:text="${postObj.postBody}"></p>
+							<img th:src="@{/img/{imageName}(imageName=${postObj.postImage})}" alt="Post Image"
+								class="img-fluid" style="max-width: 100px; max-height: 100px;">
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr>
+		</div>
+		<!-- /container -->
+	</main>
+	<!--    <script th:src="@{/bootstrap4/jquery.js}"></script>
+    <script th:src="@{/bootstrap4/popper.js}"></script>
+    <script th:src="@{/bootstrap4/bootstrap.js}"></script>-->
+</body>
+
+</html>

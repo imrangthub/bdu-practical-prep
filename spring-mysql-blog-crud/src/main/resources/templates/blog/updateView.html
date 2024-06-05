@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Post | Blog</title>
+    <link th:href="@{/bootstrap4/bootstrap.css}" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#" th:href="@{/}">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+ 
+        </div>
+    </nav>
+    <main role="main" class="mt-5 pt-4">
+        <div class="jumbotron">
+            <div class="container">
+                <h4>Update Post</h4>
+            </div>
+        </div>
+        <div class="container">
+            <div th:if="${session.storeErrorMsg}" class="alert alert-danger" role="alert" th:text="${session.storeErrorMsg}"></div>
+            <div th:if="${session.storeSuccessMsg}" class="alert alert-success" role="alert" th:text="${session.storeSuccessMsg}"></div>
+            <form th:action="@{/blog/update/{postId}(postId=${post.id})}" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" th:value="${post.postTitle}" placeholder="Enter title">
+                </div>
+                <div class="form-group">
+                    <label for="body">Body</label>
+                    <textarea class="form-control" id="body" name="body" rows="5" placeholder="Enter body" th:text="${post.postBody}"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <input type="file" class="form-control-file" id="image" name="image" accept=".jpg,.jpeg,.png">
+                </div>
+                <button type="submit" class="btn btn-primary">Update Post</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
