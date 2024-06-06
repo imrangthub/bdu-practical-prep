@@ -1,0 +1,34 @@
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="mb-4">Book List</h2>
+        <a routerLink="/books/create" class="btn btn-primary mb-3">Create New Book</a>
+        <table class="table table-hover table-bordered">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Type</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (book of books; track book){
+            <tr>
+              <td>{{ book.name }}</td>
+              <td>{{ book.type }}</td>
+              <td>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                  <a routerLink="['/books', book.id]" class="btn btn-info btn-sm">View</a>
+                  <a routerLink="['/books/edit', book.id]" class="btn btn-warning btn-sm">Edit</a>
+                  <!-- <button (click)="deleteBook(book.id)" class="btn btn-danger btn-sm">Delete</button> -->
+                </div>
+              </td>
+            </tr>
+        }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+ 

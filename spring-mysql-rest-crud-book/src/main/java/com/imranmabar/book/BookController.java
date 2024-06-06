@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/books")
+@RequestMapping("/book")
 public class BookController {
 
 	@Autowired
@@ -25,7 +25,7 @@ public class BookController {
 	@Autowired
 	BookRepository bookRepository;
 
-	@GetMapping("/book")
+	@GetMapping("/list")
 	public List getBookList() {
 		return bookRepository.findAll();
 	}
@@ -40,17 +40,7 @@ public class BookController {
 		return ResponseEntity.ok(bookService.createBook(book));
 	}
 
-	@GetMapping
-	public ResponseEntity<List<BookEntity>> getAllBooks() {
-		return ResponseEntity.ok(bookService.getAllBooks());
-	}
-
-	@GetMapping("/{id}")
-	public ResponseEntity<BookEntity> getBookById(@PathVariable Long id) {
-		return ResponseEntity.ok(bookService.getBookById(id).orElseThrow(() -> new RuntimeException("Book not found")));
-	}
-
-	@PutMapping("/{id}")
+	@PutMapping("/update/{id}")
 	public ResponseEntity<BookEntity> updateBook(@PathVariable Long id, @RequestBody BookEntity bookDetails) {
 		return ResponseEntity.ok(bookService.updateBook(id, bookDetails));
 	}

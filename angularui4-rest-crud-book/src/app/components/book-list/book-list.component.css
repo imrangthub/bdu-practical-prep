@@ -1,0 +1,31 @@
+/* Custom styles for book list component */
+.table-hover tbody tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .table-success {
+    background-color: #d4edda;
+  }
+  
+  .table-info {
+    background-color: #d1ecf1;
+  }
+  
+  .table th, .table td {
+    vertical-align: middle;
+  }
+  
+  .table th {
+    background-color: #343a40;
+    color: #ffffff;
+  }
+  
+  .table-actions {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .btn {
+    margin-right: 5px;
+  }
+  

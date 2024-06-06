@@ -4,9 +4,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.imranmadbar</groupId>
-	<artifactId>spring-mysql-book-crud</artifactId>
+	<artifactId>spring-mysql-rest-crud-book</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-mysql-book-crud</name>
+	<name>spring-mysql-rest-crud-book</name>
 	<description>Simple Book CRUD with MySql</description>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -43,10 +43,6 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
 	</dependencies>
 	<build>

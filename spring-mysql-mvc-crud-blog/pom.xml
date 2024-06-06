@@ -4,9 +4,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.imranmadbar</groupId>
-	<artifactId>spring-mysql-blog-crud</artifactId>
+	<artifactId>spring-mysql-mvc-crud-blog</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-mysql-blog-crud</name>
+	<name>spring-mysql-mvc-crud-blog</name>
 	<description>Simple Blog CRUD with MySql</description>
 	<parent>
 		<groupId>org.springframework.boot</groupId>

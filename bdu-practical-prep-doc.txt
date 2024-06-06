@@ -1,6 +1,78 @@
 
 
 
+Angular 17 project on Ubuntu
+=============================
+Run anguarar app:angularui4-rest-crud-book
+
+ng new angularui4-rest-crud-book
+cd angularui4-rest-crud-book
+
+Install Required Packages
+npm install @angular/forms @angular/common @angular/platform-browser @angular/router
+
+
+
+create service 
+ng g s services/book --module=app.module
+
+
+Create the Book Service
+ ng generate service book
+
+ 
+Create Book Components
+ng generate component book-list
+ng generate component book-create
+ng generate component book-edit
+ng generate component book-detail
+
+
+
+
+
+Install angular
+----------------------------
+# Install Node.js and npm
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt-get install -y nodejs
+node -v
+npm -v
+
+
+# Install Angular CLI
+sudo npm install -g @angular/cli@17
+ng version
+
+
+# Create a new Angular project
+ng new my-angular-project
+
+# Navigate to the project directory
+cd my-angular-project
+
+# Serve the application
+ng serve
+
+
+
+
+
+spring-security-jwt-auth
+=============================
+curl --location 'localhost:8282/authenticate' \
+--header 'Content-Type: application/json' \
+--data '{
+    "username": "admin",
+    "password": "admin"
+}'
+Generate token
+
+curl --location 'localhost:8282/admin' \
+--header 'Authorization: Bearer rwerwsometoken'
+
+
+
 
 spring-security-mvcapp
 =============================
@@ -187,6 +259,111 @@ sudo update-alternatives --remove java /opt/jdk/bin/java
 
 Finally Delete directory:
 sudo rm -rf /opt/jdk
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GitHub CICD
+=============================
+Project->Setting->Secret and Variable
+Set Directory
+Then .github directory create workflow	
+Create file jobfile.yaml file 
+
+name: Upload Website
+
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+
+    - name: Deploy static site to S3 bucket
+      run: aws s3 sync . s3://drawdine.com --delete
+
+
+
+
+GitLab
+----------------------
+In project root directory:
+.gitlabci.yml
+
+stages:
+  - triggers
+
+openapi-cms-current:
+  stage: triggers
+  trigger:
+    include: pipeline/.dev-gitlab-ci.yml
+  rules:
+    - changes:
+        - $CI_COMMIT_BRANCH
+    - exists:
+        - $CI_COMMIT_BRANCH == "TEST_RELEASE"
+        
+        
+
+default:
+  tags:
+    - java
+
+stages:
+ - build
+ - deploy
+
+gradlebuild:
+  image: gradle:alpine
+  stage: build
+  script:
+    - echo "Setting JAVA_HOME"
+    - export JAVA_HOME=$JAVA_HOME
+    - source /etc/environment
+    - gradle clean build
+  artifacts:
+    paths:
+      - build/libs/*.jar
+
+deploy-master:
+  before_script:
+    - echo "Host= $HOST"
+  stage: deploy
+  script:
+    - sshpass -V
+    - export SSHPASS=$PASSWORD
+    - sshpass -e scp pipeline/script/* $USER@$HOST:$workdir
+    - sshpass -e ssh $USER@$HOST 'cd /app/apihub/v1/mybl/app-management/discovery-eureka && chmod +x killprocess.sh && sh killprocess.sh'
+    - sshpass -e scp build/libs/discovery-eureka-*.jar $USER@$HOST:$workdir
+    - sshpass -e ssh $USER@$HOST 'cd /app/apihub/v1/mybl/app-management/discovery-eureka && chmod +x deploy-script.sh && sh deploy-script.sh'
+
+
+
+
+
+
 
 
 
