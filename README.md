@@ -721,7 +721,86 @@ Remove/Uninstall java from Linux: assuming you have a Java version installed in 
 
 
 
+#java-executable-jar-creating
+========================================
 
+=>javac MyMainCls.java 
+=>java MyMainCls
+
+	=> jar cvef MyMainCls MyMainCls.jar *.class
+	=>java -jar MyMainCls.jar
+ 
+OR with a manifiest file
+
+        =>jar -cvfm MyMainCls.jar manifest.txt *.class
+        
+manifest.txt
+
+        Main-Class: MyMainCl
+        
+        
+        
+View sources of used Java classes in IntelliJ Idea
+---------------------------------------------------
+
+    File | Project Structure
+    Click Libraries tab
+    Pick library and click + icon
+    Find a JAR file containing sources.       
+
+
+
+ 
+
+Java Fx
+=============================
+Download mysql connector, then add it on project directory and finally add it to build path:
+
+	Build Path > Configure Build Path.
+
+		mysql-connector-j-8.0.31.jar
+  
+
+
+Java file read/write
+=============================
+
+When you run application make sure access file from project location base on you runtime OS file path system.
+
+		<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		  <modelVersion>4.0.0</modelVersion>
+		  <groupId>com.imran</groupId>
+		  <artifactId>JavaFileReadWrite</artifactId>
+		  <version>0.0.1-SNAPSHOT</version>
+		    <dependencies>
+			<dependency>
+			    <groupId>com.googlecode.json-simple</groupId>
+			    <artifactId>json-simple</artifactId>
+			    <version>1.1.1</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+			<dependency>
+			    <groupId>com.fasterxml.jackson.core</groupId>
+			    <artifactId>jackson-core</artifactId>
+			    <version>2.9.5</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+			<dependency>
+			    <groupId>com.fasterxml.jackson.core</groupId>
+			    <artifactId>jackson-databind</artifactId>
+			    <version>2.9.5</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+			<dependency>
+			    <groupId>com.google.code.gson</groupId>
+			    <artifactId>gson</artifactId>
+			    <version>2.8.2</version>
+			</dependency>
+	           </dependencies>
+		</project>
 
 
 
