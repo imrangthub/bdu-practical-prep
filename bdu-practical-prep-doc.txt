@@ -1,5 +1,70 @@
 
 
+spring-jasper-reports
+
+
+MySql
+=============================
+
+Mysql Config 
+-----------------------------
+mysqld --verbose --help | grep -A 1 "Default options"
+Find active config file
+
+/etc/mysql/my.cnf
+/usr/local/mysql/etc/my.cnf
+C:\Program Files\MySQL\MySQL Server <version>\my.ini
+C:\Program Files\MySQL\MySQL Server <version>\my.cnf
+C:\Windows\my.ini
+
+Debian/Ubuntu: /etc/mysql/mysql.conf.d/mysqld.cnf
+RedHat/CentOS/Fedora: /etc/my.cnf or /etc/mysql/my.cnf
+
+
+MysqlLogging
+-----------------------------
+1. ErrorLogLocation:The error log contains information about errors that occur while the server is running. It is particularly useful for diagnosing issues with the server itself.
+SHOW VARIABLES LIKE 'log_error';
+Error Log
+Default Location (Linux): /var/log/mysql/error.log or /var/log/mysqld.log
+Default Location (Windows): C:\ProgramData\MySQL\MySQL Server <version>\Data\
+
+2. General Query Log: The general query log contains a record of when clients connect or disconnect, and what queries they execute.
+SET GLOBAL general_log = 'ON';
+ SHOW VARIABLES LIKE 'general_log%';
+SET GLOBAL general_log_file = '/path/to/query.log';
+
+
+3. Binary Log
+The binary log contains all statements that change data. It's crucial for replication and data recovery.
+
+Default Location (Linux): /var/lib/mysql/ (files named binlog.xxxxxx)
+Default Location (Windows): C:\ProgramData\MySQL\MySQL Server <version>\Data\
+SHOW VARIABLES LIKE 'log_bin';
+SHOW BINARY LOGS;
+
+4. Slow Query Log
+The slow query log contains queries that took longer than long_query_time to execute.
+The long_query_time variable in MySQL is a configuration setting that determines the threshold time for logging slow queries. 
+Default Value: The default value for long_query_time is 10 seconds.
+SHOW VARIABLES LIKE 'long_query_time';
+
+
+Default Location (Linux): /var/lib/mysql/ (named hostname-slow.log)
+Default Location (Windows): C:\ProgramData\MySQL\MySQL Server <version>\Data\
+Check and enable:
+SHOW VARIABLES LIKE 'slow_query_log%';
+SET GLOBAL slow_query_log = 'ON';
+SET GLOBAL slow_query_log_file = '/path/to/slow-query.log';
+
+5. InnoDB Log
+InnoDB, the default storage engine, keeps its own logs for transaction purposes.
+SHOW ENGINE INNODB STATUS;
+
+
+
+
+
 
 Angular 17 project on Ubuntu
 =============================
@@ -18,7 +83,7 @@ ng g s services/book --module=app.module
 
 
 Create the Book Service
- ng generate service book
+ ng generate service services/book
 
  
 Create Book Components
