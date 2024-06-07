@@ -1,6 +1,125 @@
+https://drive.google.com/drive/folders/11DXlnw9W4by49ZEWymT0SoA_te0NesyR?usp=sharing
+
 
 
 spring-jasper-reports
+=============================
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<project xmlns="http://maven.apache.org/POM/4.0.0"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+		<modelVersion>4.0.0</modelVersion>
+		<groupId>com.imranmadbar</groupId>
+		<artifactId>spring-jasper-reports</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<name>spring-jasper-reports</name>
+		<description>Simple Book CRUD with MySql</description>
+		<parent>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-parent</artifactId>
+			<version>2.5.2</version>
+			<relativePath /> <!-- lookup parent from repository -->
+		</parent>
+		<properties>
+			<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+			<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+			<java.version>1.8</java.version>
+		</properties>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-web</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-test</artifactId>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<optional>true</optional>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-data-jpa</artifactId>
+			</dependency>
+			<!-- mysql connector -->
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<scope>runtime</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>jstl</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.tomcat.embed</groupId>
+				<artifactId>tomcat-embed-jasper</artifactId>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-configuration-processor</artifactId>
+				<optional>true</optional>
+			</dependency>
+
+
+			<dependency>
+				<groupId>com.google.code.gson</groupId>
+				<artifactId>gson</artifactId>
+			</dependency>
+
+			<dependency>
+				<groupId>net.sf.jasperreports</groupId>
+				<artifactId>jasperreports</artifactId>
+				<version>6.4.1</version>
+				<exclusions>
+					<exclusion>
+						<groupId>com.fasterxml.jackson.core</groupId>
+						<artifactId>jackson-core</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>org.json</groupId>
+				<artifactId>json</artifactId>
+				<version>20240303</version>
+			</dependency>
+
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>1.2.17</version>
+			</dependency>
+
+			<dependency>
+				<groupId>net.sourceforge.barbecue</groupId>
+				<artifactId>barbecue</artifactId>
+				<version>1.5-beta1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>net.sf.barcode4j</groupId>
+				<artifactId>barcode4j</artifactId>
+				<version>2.1</version>
+			</dependency>
+		</dependencies>
+		<build>
+			<plugins>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+				</plugin>
+			</plugins>
+		</build>
+	</project>
+
+
 
 
 MySql
@@ -8,11 +127,13 @@ MySql
 
 Mysql Config 
 -----------------------------
-mysqld --verbose --help | grep -A 1 "Default options"
+
+	mysqld --verbose --help | grep -A 1 "Default options"
+	
 Find active config file
 
-/etc/mysql/my.cnf
-/usr/local/mysql/etc/my.cnf
+	/etc/mysql/my.cnf
+	/usr/local/mysql/etc/my.cnf
 C:\Program Files\MySQL\MySQL Server <version>\my.ini
 C:\Program Files\MySQL\MySQL Server <version>\my.cnf
 C:\Windows\my.ini
@@ -24,42 +145,47 @@ RedHat/CentOS/Fedora: /etc/my.cnf or /etc/mysql/my.cnf
 MysqlLogging
 -----------------------------
 1. ErrorLogLocation:The error log contains information about errors that occur while the server is running. It is particularly useful for diagnosing issues with the server itself.
-SHOW VARIABLES LIKE 'log_error';
-Error Log
-Default Location (Linux): /var/log/mysql/error.log or /var/log/mysqld.log
-Default Location (Windows): C:\ProgramData\MySQL\MySQL Server <version>\Data\
+
+	SHOW VARIABLES LIKE 'log_error';
+	Error Log
+	Default Location (Linux): /var/log/mysql/error.log or /var/log/mysqld.log
+	Default Location (Windows): C:\ProgramData\MySQL\MySQL Server <version>\Data\
 
 2. General Query Log: The general query log contains a record of when clients connect or disconnect, and what queries they execute.
-SET GLOBAL general_log = 'ON';
- SHOW VARIABLES LIKE 'general_log%';
-SET GLOBAL general_log_file = '/path/to/query.log';
+
+	SET GLOBAL general_log = 'ON';
+	 SHOW VARIABLES LIKE 'general_log%';
+	SET GLOBAL general_log_file = '/path/to/query.log';
 
 
 3. Binary Log
 The binary log contains all statements that change data. It's crucial for replication and data recovery.
 
-Default Location (Linux): /var/lib/mysql/ (files named binlog.xxxxxx)
-Default Location (Windows): C:\ProgramData\MySQL\MySQL Server <version>\Data\
-SHOW VARIABLES LIKE 'log_bin';
-SHOW BINARY LOGS;
+	Default Location (Linux): /var/lib/mysql/ (files named binlog.xxxxxx)
+	Default Location (Windows): C:\ProgramData\MySQL\MySQL Server <version>\Data\
+	SHOW VARIABLES LIKE 'log_bin';
+	SHOW BINARY LOGS;
 
 4. Slow Query Log
 The slow query log contains queries that took longer than long_query_time to execute.
 The long_query_time variable in MySQL is a configuration setting that determines the threshold time for logging slow queries. 
 Default Value: The default value for long_query_time is 10 seconds.
-SHOW VARIABLES LIKE 'long_query_time';
+
+	SHOW VARIABLES LIKE 'long_query_time';
 
 
 Default Location (Linux): /var/lib/mysql/ (named hostname-slow.log)
 Default Location (Windows): C:\ProgramData\MySQL\MySQL Server <version>\Data\
 Check and enable:
-SHOW VARIABLES LIKE 'slow_query_log%';
-SET GLOBAL slow_query_log = 'ON';
-SET GLOBAL slow_query_log_file = '/path/to/slow-query.log';
+
+	SHOW VARIABLES LIKE 'slow_query_log%';
+	SET GLOBAL slow_query_log = 'ON';
+	SET GLOBAL slow_query_log_file = '/path/to/slow-query.log';
 
 5. InnoDB Log
 InnoDB, the default storage engine, keeps its own logs for transaction purposes.
-SHOW ENGINE INNODB STATUS;
+
+	SHOW ENGINE INNODB STATUS;
 
 
 
@@ -70,27 +196,31 @@ Angular 17 project on Ubuntu
 =============================
 Run anguarar app:angularui4-rest-crud-book
 
-ng new angularui4-rest-crud-book
-cd angularui4-rest-crud-book
+	ng new angularui4-rest-crud-book
+	cd angularui4-rest-crud-book
 
-Install Required Packages
-npm install @angular/forms @angular/common @angular/platform-browser @angular/router
+Install Required Packages:
 
-
-
-create service 
-ng g s services/book --module=app.module
+	npm install @angular/forms @angular/common @angular/platform-browser @angular/router
 
 
-Create the Book Service
- ng generate service services/book
+
+create service :
+
+	ng g s services/book --module=app.module
+
+
+Create the Book Service:
+
+ 	ng generate service services/book
 
  
-Create Book Components
-ng generate component book-list
-ng generate component book-create
-ng generate component book-edit
-ng generate component book-detail
+Create Book Components:
+
+	ng generate component book-list
+	ng generate component book-create
+	ng generate component book-edit
+	ng generate component book-detail
 
 
 
@@ -98,26 +228,31 @@ ng generate component book-detail
 
 Install angular
 ----------------------------
-# Install Node.js and npm
-curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-sudo apt-get install -y nodejs
-node -v
-npm -v
+# Install Node.js and npm:
+
+	curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+	sudo apt-get install -y nodejs
+	node -v
+	npm -v
 
 
-# Install Angular CLI
-sudo npm install -g @angular/cli@17
-ng version
+# Install Angular CLI:
+
+	sudo npm install -g @angular/cli@17
+	ng version
 
 
-# Create a new Angular project
-ng new my-angular-project
+# Create a new Angular project:
 
-# Navigate to the project directory
-cd my-angular-project
+	ng new my-angular-project
 
-# Serve the application
-ng serve
+# Navigate to the project directory:
+
+	cd my-angular-project
+
+# Serve the application:
+
+	ng serve
 
 
 
@@ -125,26 +260,123 @@ ng serve
 
 spring-security-jwt-auth
 =============================
-curl --location 'localhost:8282/authenticate' \
---header 'Content-Type: application/json' \
---data '{
-    "username": "admin",
-    "password": "admin"
-}'
-Generate token
 
-curl --location 'localhost:8282/admin' \
---header 'Authorization: Bearer rwerwsometoken'
+	CREATE TABLE `roles_tbl` (
+	  `id` bigint NOT NULL,
+	  `description` varchar(255) DEFAULT NULL,
+	  `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
+	  `name` varchar(255) DEFAULT NULL,
+	  PRIMARY KEY (`id`)
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+	CREATE TABLE `users_roles_tbl` (
+	  `id` bigint NOT NULL,
+	  `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
+	  `role_id` bigint DEFAULT NULL,
+	  `user_id` bigint DEFAULT NULL,
+	  PRIMARY KEY (`id`),
+	  KEY `FKec55svjjqvr2r098g415jqrpp` (`role_id`),
+	  KEY `FK16ne3yb5jx0r56xxmb5bp6d82` (`user_id`),
+	  CONSTRAINT `FK16ne3yb5jx0r56xxmb5bp6d82` FOREIGN KEY (`user_id`) REFERENCES `users_tbl` (`id`),
+	  CONSTRAINT `FKec55svjjqvr2r098g415jqrpp` FOREIGN KEY (`role_id`) REFERENCES `roles_tbl` (`id`)
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+	CREATE TABLE `users_tbl` (
+	  `id` bigint NOT NULL,
+	  `full_name` varchar(255) DEFAULT NULL,
+	  `password` varchar(255) DEFAULT NULL,
+	  `username` varchar(255) DEFAULT NULL,
+	  PRIMARY KEY (`id`),
+	  UNIQUE KEY `UK_7p2qdaqmxojhma31lopxr6gqx` (`username`)
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
+
+	curl --location 'localhost:8282/authenticate' \
+	--header 'Content-Type: application/json' \
+	--data '{
+	    "username": "admin",
+	    "password": "admin"
+	}'
+	
+	
+Generate token:
+
+	curl --location 'localhost:8282/admin' --header 'Authorization: Bearer rwerwsometoken'
+
+
+	<project xmlns="http://maven.apache.org/POM/4.0.0"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		<modelVersion>4.0.0</modelVersion>
+
+		<groupId>com.example</groupId>
+		<artifactId>spring-security-jwt-auth</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<packaging>jar</packaging>
+		<name>spring-security-jwt-auth</name>
+		<description>Spring Boot with JWT Security</description>
+
+		<parent>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-parent</artifactId>
+			<version>2.7.3</version>
+			<relativePath /> <!-- lookup parent from repository -->
+		</parent>
+
+		<properties>
+			<java.version>1.8</java.version>
+		</properties>
+
+		<dependencies>
+			<!-- Spring Boot Starter Web -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-web</artifactId>
+			</dependency>
+
+			<!-- Spring Boot Starter Security -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-security</artifactId>
+			</dependency>
+
+			<!-- JWT Dependencies -->
+			<dependency>
+				<groupId>io.jsonwebtoken</groupId>
+				<artifactId>jjwt</artifactId>
+				<version>0.9.1</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.xml.bind</groupId>
+				<artifactId>jaxb-api</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.glassfish.jaxb</groupId>
+				<artifactId>jaxb-runtime</artifactId>
+			</dependency>
+
+		</dependencies>
+
+		<build>
+			<plugins>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+				</plugin>
+			</plugins>
+		</build>
+
+	</project>
 
 
 spring-security-mvcapp
 =============================
 USE bdu_practical_prepdb;
-INSERT INTO `bdu_practical_prepdb`.roles_tbl (`id`, `description`, `is_deleted`, `name`) VALUES ('99999990', 'Role for Admin', '0', 'ROLE_ADMIN');
-INSERT INTO `bdu_practical_prepdb`.roles_tbl (`id`, `description`, `is_deleted`, `name`) VALUES ('99999991', 'Role for Manager', '0', 'ROLE_MANAGER');
-INSERT INTO `bdu_practical_prepdb`.roles_tbl (`id`, `description`, `is_deleted`, `name`) VALUES ('99999992', 'Role for User', '0', 'ROLE_USER');
+
+	INSERT INTO `bdu_practical_prepdb`.roles_tbl (`id`, `description`, `is_deleted`, `name`) VALUES ('99999990', 'Role for Admin', '0', 'ROLE_ADMIN');
+	INSERT INTO `bdu_practical_prepdb`.roles_tbl (`id`, `description`, `is_deleted`, `name`) VALUES ('99999991', 'Role for Manager', '0', 'ROLE_MANAGER');
+	INSERT INTO `bdu_practical_prepdb`.roles_tbl (`id`, `description`, `is_deleted`, `name`) VALUES ('99999992', 'Role for User', '0', 'ROLE_USER');
 
 
 
@@ -155,65 +387,212 @@ INSERT INTO `bdu_practical_prepdb`.roles_tbl (`id`, `description`, `is_deleted`,
 
 BlogCrud
 =============================
-INSERT INTO `bdu_practical_prepdb`.`blog_post` (`id`, `category`, `post_body`, `post_image`, `post_title`) VALUES ('2', '1', 'ertertert2', 'ertert2', 'ertetert2');
+
+	SHOW VARIABLES LIKE 'datadir';
+		CREATE TABLE `blog_post` (
+		  `id` bigint NOT NULL,
+		  `category` varchar(255) DEFAULT NULL,
+		  `create_at` datetime DEFAULT NULL,
+		  `modify_at` datetime DEFAULT NULL,
+		  `post_body` varchar(255) DEFAULT NULL,
+		  `post_image` varchar(255) DEFAULT NULL,
+		  `post_title` varchar(255) DEFAULT NULL,
+		  PRIMARY KEY (`id`)
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+	INSERT INTO `bdu_practical_prepdb`.`blog_post` (`id`, `category`, `post_body`, `post_image`, `post_title`) VALUES ('2', '1', 'ertertert2', 'ertert2', 'ertetert2');
 
 
 
+		<?xml version="1.0" encoding="UTF-8"?>
+		<project xmlns="http://maven.apache.org/POM/4.0.0"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+			<modelVersion>4.0.0</modelVersion>
+			<groupId>com.imranmadbar</groupId>
+			<artifactId>spring-mysql-mvc-crud-blog</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<name>spring-mysql-mvc-crud-blog</name>
+			<description>Simple Blog CRUD with MySql</description>
+			<parent>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-parent</artifactId>
+				<version>2.5.2</version>
+				<relativePath /> <!-- lookup parent from repository -->
+			</parent>
+			<properties>
+				<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+				<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+				<java.version>1.8</java.version>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-web</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-thymeleaf</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>nz.net.ultraq.thymeleaf</groupId>
+					<artifactId>thymeleaf-layout-dialect</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-test</artifactId>
+					<scope>test</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.projectlombok</groupId>
+					<artifactId>lombok</artifactId>
+					<optional>true</optional>
+				</dependency>
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-data-jpa</artifactId>
+				</dependency>
+				<!-- mysql connector -->
+				<dependency>
+					<groupId>mysql</groupId>
+					<artifactId>mysql-connector-java</artifactId>
+					<scope>runtime</scope>
+				</dependency>
+			</dependencies>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+		</project>
 
 
-spring-security-mvcapp
+
+	CREATE TABLE `book` (
+	  `id` bigint NOT NULL,
+	  `name` varchar(255) DEFAULT NULL,
+	  `type` varchar(255) DEFAULT NULL,
+	  PRIMARY KEY (`id`)
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 
 
 JSP CRUD Example
 =============================
-Download jstl.jar and mysql-connector.jar
-Download jstl1.2.jar file
-Download mysql-connector.jar
 
-Pom.xml
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>simple-jsp-mysql-crud</groupId>
-	<artifactId>simple-jsp-mysql-crud</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
-	<properties>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-	</properties>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.2</version>
-				<configuration>
-					<port>8080</port>
-					<path>/</path>
-				</configuration>
-			</plugin>
-		</plugins>
+	Download jstl.jar and mysql-connector.jar
+	Download jstl1.2.jar file
+	Download mysql-connector.jar
+
+Pom.xml:
 
 
-	</build>
-</project>
+	<project xmlns="http://maven.apache.org/POM/4.0.0"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+		<modelVersion>4.0.0</modelVersion>
+		<groupId>com.imranmadbar</groupId>
+		<artifactId>jsp-mysql-maven-crud</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<name>jsp-mysql-maven-crud</name>
+
+
+		<packaging>war</packaging>
+		<properties>
+			<maven.compiler.source>1.8</maven.compiler.source>
+			<maven.compiler.target>1.8</maven.compiler.target>
+		</properties>
+		<dependencies>
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>4.0.1</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet.jsp</groupId>
+				<artifactId>javax.servlet.jsp-api</artifactId>
+				<version>2.3.3</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>jstl</groupId>
+				<artifactId>jstl</artifactId>
+				<version>1.2</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>jstl</artifactId>
+				<version>1.2</version>
+			</dependency>
+			<dependency>
+				<groupId>taglibs</groupId>
+				<artifactId>standard</artifactId>
+				<version>1.1.2</version>
+			</dependency>
+
+			<!--
+			https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+			<dependency>
+				<groupId>commons-fileupload</groupId>
+				<artifactId>commons-fileupload</artifactId>
+				<version>1.3.1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>8.0.33</version>
+			</dependency>
+
+		</dependencies>
+		<build>
+			<finalName>jsp-mysql-maven-crud</finalName>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.tomcat.maven</groupId>
+					<artifactId>tomcat7-maven-plugin</artifactId>
+					<version>2.2</version>
+					<configuration>
+						<port>8081</port>
+						<path>/</path>
+					</configuration>
+				</plugin>
+			</plugins>
+
+
+		</build>
+
+
+	</project>
 
 
 httpRequest commandline
 =============================
+
 Create a new book:
-curl -X POST http://localhost:8080/api/books -H "Content-Type: application/json" -d '{"name": "Book One", "type": "Fiction"}'
+
+	curl -X POST http://localhost:8080/api/books -H "Content-Type: application/json" -d '{"name": "Book One", "type": "Fiction"}'
+	
 Get all books:
-curl -X GET http://localhost:8080/api/books
+
+	curl -X GET http://localhost:8080/api/books
+	
 Get a book by ID:
-curl -X GET http://localhost:8080/api/books/1
+
+	curl -X GET http://localhost:8080/api/books/1
+	
 Update a book by ID:
-curl -X PUT http://localhost:8080/api/books/1 -H "Content-Type: application/json" -d '{"name": "Updated Book One", "type": "Non-Fiction"}'
+
+	curl -X PUT http://localhost:8080/api/books/1 -H "Content-Type: application/json" -d '{"name": "Updated Book One", "type": "Non-Fiction"}'
+	
 Delete a book by ID:
-curl -X DELETE http://localhost:8080/api/books/1
+
+	curl -X DELETE http://localhost:8080/api/books/1
 
 
 
@@ -225,6 +604,7 @@ Download Tomcat as tar stract it and Configure Server properties:
 --------------------
 
 Port:
+
 sudo nano /opt/tomcat/conf/server.xml
 <Connector port="8080" protocol="HTTP/1.1"
            connectionTimeout="20000"
@@ -233,33 +613,37 @@ sudo nano /opt/tomcat/conf/server.xml
 
 
 Configure Users and Roles
-sudo nano /opt/tomcat/conf/tomcat-users.xml
-<role rolename="manager-gui"/>
-<role rolename="admin-gui"/>
-<user username="admin" password="password" roles="manager-gui,admin-gui"/>
+
+	sudo nano /opt/tomcat/conf/tomcat-users.xml
+	
+	<role rolename="manager-gui"/>
+	<role rolename="admin-gui"/>
+	<user username="admin" password="password" roles="manager-gui,admin-gui"/>
 
 Restrict Access to the Manager and Host Manager Apps:Comment out the Valve element
-sudo nano /opt/tomcat/webapps/manager/META-INF/context.xml
-<!--
-<Valve className="org.apache.catalina.valves.RemoteAddrValve"
-       allow="127\.\d+\.\d+\.\d+|::1" />
--->
 
-sudo nano /opt/tomcat/webapps/host-manager/META-INF/context.xml
-<!--
-<Valve className="org.apache.catalina.valves.RemoteAddrValve"
-       allow="127\.\d+\.\d+\.\d+|::1" />
--->
+	sudo nano /opt/tomcat/webapps/manager/META-INF/context.xml
+	<!--
+	<Valve className="org.apache.catalina.valves.RemoteAddrValve"
+	       allow="127\.\d+\.\d+\.\d+|::1" />
+	-->
+
+	sudo nano /opt/tomcat/webapps/host-manager/META-INF/context.xml
+	<!--
+	<Valve className="org.apache.catalina.valves.RemoteAddrValve"
+	       allow="127\.\d+\.\d+\.\d+|::1" />
+	-->
 
  
  
  
-Start tomcat
-cd /opt/tomcat
-sudo ./bin/startup.sh
-OR
-create a service and:
-sudo systemctl restart tomcat
+Start tomcat:
+
+	cd /opt/tomcat
+	sudo ./bin/startup.sh
+	OR
+	create a service and:
+	sudo systemctl restart tomcat
 
 
 
@@ -269,35 +653,38 @@ sudo systemctl restart tomcat
 
 MySql
 =============================
-=>sudo mysql -u root -p
-mysql-login
 
-=>service mysql start   
-=>systemctl status mysql
-=>service mysql stop
+	=>sudo mysql -u root -p
+	mysql-login
+
+	=>service mysql start   
+	=>systemctl status mysql
+	=>service mysql stop
 
 
 
 Java
 =============================
-=>which java
-=>sudo update-alternatives --display java
-Check java
 
-=>sudo update-alternatives --config java
-Switch java version
+	=>which java
+	=>sudo update-alternatives --display java
+	Check java
+
+	=>sudo update-alternatives --config java
+	Switch java version
 
 
 Install java
 --------------------------------------------------------
-Download tar file then:
-sudo tar -zxvf jdk-8u202-linux-x64.tar.gz
-mv jdk-8u202-linux-x64 java8
 
-Step 2: Set Up update-alternatives
-sudo update-alternatives --install /usr/bin/java java /opt/jdk/jdk8u202/bin/java 1
-sudo update-alternatives --install /usr/bin/javac javac /opt/jdk/jdk8u202/bin/javac 1
-java -/--version
+	Download tar file then:
+	sudo tar -zxvf jdk-8u202-linux-x64.tar.gz
+	mv jdk-8u202-linux-x64 java8
+
+	Step 2: Set Up update-alternatives
+	sudo update-alternatives --install /usr/bin/java java /opt/jdk/jdk8u202/bin/java 1
+	sudo update-alternatives --install /usr/bin/javac javac /opt/jdk/jdk8u202/bin/javac 1
+	java -/--version
 
 
 
@@ -306,24 +693,25 @@ java -/--version
 
 Remove/Uninstall java from Linux: assuming you have a Java version installed in /opt/jdk
 -----------------------------------------------------------
-Step1: Check the symbolic links:
 
-ls -l /usr/bin/java
-readlink -f /usr/bin/java
+	Step1: Check the symbolic links:
 
-ls -l /etc/alternatives/java
-readlink -f /etc/alternatives/java
+	ls -l /usr/bin/java
+	readlink -f /usr/bin/java
 
-Step2:Remove the symbolic links:
+	ls -l /etc/alternatives/java
+	readlink -f /etc/alternatives/java
 
-sudo rm /usr/bin/java
-sudo rm /etc/alternatives/java
+	Step2:Remove the symbolic links:
 
-Step3: Remove the Java version from update-alternatives:
-sudo update-alternatives --remove java /opt/jdk/bin/java
+	sudo rm /usr/bin/java
+	sudo rm /etc/alternatives/java
 
-Finally Delete directory:
-sudo rm -rf /opt/jdk
+	Step3: Remove the Java version from update-alternatives:
+	sudo update-alternatives --remove java /opt/jdk/bin/java
+
+	Finally Delete directory:
+	sudo rm -rf /opt/jdk
 
 
 
@@ -423,6 +811,405 @@ deploy-master:
     - sshpass -e ssh $USER@$HOST 'cd /app/apihub/v1/mybl/app-management/discovery-eureka && chmod +x killprocess.sh && sh killprocess.sh'
     - sshpass -e scp build/libs/discovery-eureka-*.jar $USER@$HOST:$workdir
     - sshpass -e ssh $USER@$HOST 'cd /app/apihub/v1/mybl/app-management/discovery-eureka && chmod +x deploy-script.sh && sh deploy-script.sh'
+
+
+
+
+
+
+Activity:
+====================
+
+
+	tail -f access.log | awk '$8==500'
+	Printing all 500 request
+
+	cat access.log | awk '$8==500{print $6}' | sort  | uniq -c | sort -nr | head
+
+
+	cat access.log | awk '{print $8}' | sort  | uniq --count
+	Print total status count
+
+
+	tail -1000 access.log |awk '{print $12,$8}'|sort|uniq --repeated --count
+	Print load balanced IPs and their request status count
+
+
+
+	cat  access.log | grep -v '200' | awk '{print $12 " " $8}' | sort | uniq --count
+	Print slb wise status count with-out 200
+
+	Service wise status code
+
+
+	tail -1000 access.log | grep /sms |awk '{print $12,$8}'|sort|uniq --repeated --count
+
+	tail -10000 access.log | grep provisioning |awk '{print $12,$8}'|sort|uniq --repeated --count
+
+
+
+Service/api wise Status check
+--------------------------------------
+	tail -10000 access.log | grep otp |awk '{print $12,$8}'|sort|uniq --repeated --count
+
+	tail -f access.log | awk '$8==500'
+	Print logs ny status code
+
+	cat access.log | awk '$8==499{print $14}' | sort -nr | head
+	cat access.log | grep prepaid-balances | awk '$8==499{print $14}' | sort -nr | head
+	Response time by httpStatus code
+
+	cat access.log | grep prepaid-balances | awk '$8==499{print $14}' | sort -nr | tail -10
+	Response time MaxMin
+
+
+
+#################################################
+#                  SQL                         #
+#################################################
+
+
+	=>mysql -uroot -p
+	=>mysql --host=127.0.0.1 --port=3307 -u root
+	=>mysql --host=172.16.8.132 --port=6680 -u root -p
+
+
+#Current User
+----------------
+
+	select user();
+
+	Check user
+	=>SELECT host, user FROM mysql.user;
+
+=================================================
+#  CMD | MySQL |  Environment | Windows setup                                          
+================================================= 
+
+TO_DATE.*\),
+
+#Set env verible
+-------------------------------------------------
+C:\Program Files\MySQL\MySQL Server 8.0\bin
+
+#Check Version
+-------------------- 
+
+	=>mysql -h localhost -V
+	=>mysql -V
+	=SELECT VERSION();
+	=>SHOW VARIABLES LIKE "%version%"
+
+
+#what character set a MySQL database / table / column is?
+----------------------------------------------------------------
+
+	=>SHOW VARIABLES LIKE 'character_set%';
+	=>SELECT SCHEMA_NAME 'database', default_character_set_name 'charset', DEFAULT_COLLATION_NAME 'collation' FROM information_schema.SCHEMATA;
+
+	Alter Charecter SET
+	=>ALTER DATABASE dbname CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+	=>ALTER DATABASE databasename CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+	=>ALTER TABLE tablename CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+	=>ALTER DATABASE databasename CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+	=>ALTER TABLE tablename CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+	#Ensure that your databse engine is InnoDB
+	-----------------------------------------------
+	Should output: default_storage_engine InnoDB
+	=>SHOW GLOBAL variables like "default_storage%"
+
+	If storage engine is not InnoDB, use this to set it
+	=>SET GLOBAL default_storage_engine = 'InnoDB';
+
+
+#Import SQL
+-------------------------------------------------
+
+	source  D:/DOCKER_OAUTH2_WORKSHOP/GRANT_TYPE_PASSWORD/authorization-server-api/src/main/resources/spring_boot_oauth2_db.sql
+
+#Check Mysql
+-------------------------------------------------
+
+	shell> mysqladmin version
+	shell> mysqladmin variables
+	shell> mysqladmin -h `hostname` version variables
+	shell> mysqladmin -h `hostname` --port=3306 version
+	shell> mysqladmin -h host_ip version
+	shell> mysqladmin --protocol=SOCKET --socket=/tmp/mysql.sock version
+
+
+#MySQL Server Start
+--------------------------------------------------
+
+	=>service mysql start
+	=>systemctl status mysql
+	=>service mysql stop
+
+
+	Run the command prompt as admin and cd to bin directory of MySQL
+
+	Generally it is (C:\Program Files\MySQL\mysql-5.6.36-winx64\bin)
+	Run command : mysqld --install. (This command will install MySQL services and if services already installed it will prompt.)
+
+	Run below commands to start and stop server
+
+	To start : net start mysql
+
+	To stop : net stop mysql
+
+	netstat -ano | findstr 3306
+	taskkill /F /PID 2368
+
+
+#Change Root Password
+--------------------------------------------------.
+
+	Create a File in C drive as with below line :C:\mysql-init.txt
+
+	ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';
+
+	Then Do:
+
+	C:\> cd "C:\Program Files\MySQL\MySQL Server 5.7\bin"
+	C:\> mysqld --init-file=C:\\mysql-init.txt
+
+
+	Set max conn in Mysql
+	=>SET GLOBAL max_connections = 750;
+	=>show variables like 'max_connections';
+
+
+
+Exporting/Importing MySQL Dump | dump
+-------------------------------------------------
+
+	=>mysqldump -u my_username -p database_name > output_file_path
+	=>mysqldump -h localhost -P 3306 -u root -p simple_db  > mytestdbsump.sql
+
+
+
+=================================================
+#  MySQL | Connection check | Info check                                         
+================================================= 
+
+	=>SHOW PROCESSLIST;
+	=>SHOW FULL PROCESSLIST;
+	=>SELECT * FROM INFORMATION_SCHEMA.PROCESSLIST WHERE COMMAND != 'Sleep';
+	Current Active Connection
+
+
+	=>show status where `variable_name` = 'Threads_connected';
+	=>SHOW STATUS WHERE variable_name LIKE "Threads_%" OR variable_name = "Connections"
+
+
+	=>SELECT * FROM INFORMATION_SCHEMA.PROCESSLIST;
+	Show User with activeconnection
+
+
+
+	=>SHOW VARIABLES LIKE "max_connections";
+	Max conn
+
+	=>SET GLOBAL max_connections = 5;
+	Set Max conn
+
+
+#ORDER BY 
+-------------------------------------------------
+
+	SELECT * FROM student
+	ORDER BY create_date desc 
+
+
+
+	Check time zone:
+	SELECT @@global.time_zone;
+	or
+	=>mysql -u root -p -e "SELECT @@global.time_zone;"
+
+	=cat /etc/timezone
+	=>timedatectl
+	TimeZone check in Linux
+
+
+
+k#################################################
+#                 DOCKER                        #
+#################################################
+
+	Human->DockerClient->RestServer->DockerDeamon->ContainerD->RunC->Kernal
+	=>docker container run --help | grep rm
+
+	=>docker context ls
+
+	=>docker --version
+	=>docker info
+	=>docker login
+	=>docker logout
+
+	=>docker run -d ubuntu sleep 100
+	=>sudo docker run -ti --rm ubuntu /bin/bash
+	=>docker run imranmadbar/hello-world-java
+	=>docker run --name containerName -p 8080:8080 -d imageName:tagName
+	=>docker run --name SpringBootWebApp -p 8080:8080 -d imranmadbar/hello-world-java-maven-web-spring-boot
+	=>docker run -d --rm busybox ping -c10 google.com
+
+	=>docker stop conId
+	=>docker start contId
+
+	=>docker logs -f conId
+	=>ps -eaf | grep 8080
+	=>ps -eaf | grep docker
+	=>docker top containerId
+	=>docker exec containerId ls
+	=>docker exec -it containerId sh
+
+	=>docker cp contId:/etc/cassandra/cassandra.yaml C:/Z_MY_COMPUTER
+	=>docker cp C:/Z_MY_COMPUTER/1MD_IMRAN_HOSSAIN/JAVA/SimpleJavaApplicatio.java contId:/home
+
+	=>docker stop $(docker ps -a -q)
+	=>docker rm $(docker ps -a -q)
+	=>docker container rm -f $(docker container ls -aq)
+	=>docker image rm -f $(docker image ls -q)
+
+	=>docker system df
+	=>sudo systemctl restart docker
+	
+=================================================
+#                  Basic                                          
+================================================= 
+
+	=>docker history imageName
+	Show image layers
+
+	=>ps -eaf                   #This command inside container
+	=>ps -eaf | grep docker     #This is command exect in hostmachine
+	Show host machine pId
+
+	=>docker ps 
+	=>docker ps -a
+	=>docker images
+	=>docker container ls
+
+	=>apt-get update && apt-get install procps -y 
+	Install ps
+
+
+	=>docker container ls -aq
+	List of container id
+
+	=>docker rm contId
+	=>docker rmi img
+	=>docker system prune --all
+	Delete all image
+
+	=>docker search hadoop
+	Search for a docker image on dockerhub with the name mentioned in the command.
+
+	=>docker inspect containerId
+	=>docker -f logs 09ca6feb6efc
+
+
+	=>docker diff containerId
+	Check the different history in container
+
+	is docker registraed, check
+	=>sudo systemctl list-units --type=service | grep "docker" 
+
+	docker tag imranmadbar/nginx localhost:5000/ng-debug
+	create image from image
+
+	docker save -o ng-debug.tar localhost:5000/ng-debug
+	docker load -i ng-debug.tar
+	Save image as tar| chenge
+
+
+Registry
+
+
+	docker run -d -p 5000:5000 --restart=always --name registry registry
+	docker build . -t localhost:5000/openapi-customer-information
+	docker push localhost:5000/openapi-customer-information
+
+
+
+
+
+
+
+#################################################
+#              K8S                             #
+#################################################
+
+	systemctl --user start docker-desktop
+
+	=>kubectl api-resources
+
+	=>kubectl version
+	=>kubectl version --short 
+	=>kubectl get nodes
+
+
+General                                
+-------------------------------------------
+
+	=>=>kubectl exec webapp-color -- env
+	=>kubectl exec -it ubuntu-sleeper -- whoami
+	=>kubectl exec -it webapp-color -- sh
+
+
+	=>kubectl get pods
+	=>kubectl get pods -o wide
+	=>kubectl get -o json pod prodName
+
+	=>kubectl explain pod
+	=>kubectl explain deployment
+
+	=kubectl logs myPod
+
+	=>kubectl run --help
+	=>kubectl run myng --image=nginx --dry-run=client -o yaml>labelpod.yaml
+	=>kubectl create deployment --image=nginx nginx --dry-run=client -o yaml
+	=>kubectl run ng3 --image=nginx -- /bin/sh -c "while true; do echo  $(date); sleep 1; done "
+
+	=>k delete po myng
+
+
+	docker tag currentImageName newImageName
+	=>docker tag imranmadbar/nginx ng-debug
+	Image from Image
+
+	=>kubectl  run myng --imranmadbar/nginx
+	DockerContRun:
+	=>docker container run --name myng -dp 8080:80 imranmadbar/nginx
+
+
+Byuild image and push
+-------------------------------------------------
+
+	docker run -d -p 5000:5000 --restart=always --name registry registry
+	docker build . -t localhost:5000/openapi-customer-information
+	docker push localhost:5000/openapi-customer-information
+
+
+Service:
+--------------------------------------
+
+
+	=>kubectl create service nodeport mysvc4 --tcp=8080:80 --node-port=30040
+	=>kubectl create service nodeport mysvc4 --tcp=8080:80 --node-port=30040 --dry-run=client -o yaml>mysvc.yaml
+
+
+
+	ExposeService:
+	=>k expose pod jekyll --name=jekyll --type=NodePort --port=8080 --target-port=4000 -n development
+	=>k expose pod myng --name=ng-svc --type=NodePort --port=8080 --target-port=80 
+
+
+
+
 
 
 
