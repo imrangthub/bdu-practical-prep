@@ -11,7 +11,7 @@ public class SimpleDemoApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SimpleDemoApplication.class, args);
-		System.out.println("Simple MySql CRUD Application Run Successfully Done !");
+		System.out.println("SimpleDemoApplication Run Successfully Done !");
 	}
 
 }
