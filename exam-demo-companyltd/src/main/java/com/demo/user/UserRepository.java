@@ -1,0 +1,87 @@
+package com.demo.user;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class UserRepository {
+
+	@Autowired
+	private EntityManager entityManager;
+
+
+	  public List<UserEntity> findAll() {
+	        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+	        CriteriaQuery<UserEntity> criteria = builder.createQuery(UserEntity.class);
+	        Root<UserEntity> root = criteria.from(UserEntity.class);
+	        criteria.select(root);
+	        return entityManager.createQuery(criteria).getResultList();
+	    }
+	  
+	public UserEntity findById(Long id) {
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<UserEntity> criteria = builder.createQuery(UserEntity.class);
+		Root<UserEntity> root = criteria.from(UserEntity.class);
+		criteria.select(root).where(builder.equal(root.get("id"), id));
+		return entityManager.createQuery(criteria).getSingleResult();
+	}
+
+	public UserEntity findByIdObj(Long id) {
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<UserEntity> criteria = builder.createQuery(UserEntity.class);
+		Root<UserEntity> root = criteria.from(UserEntity.class);
+		criteria.select(root).where(builder.equal(root.get("id"), id));
+		try {
+			return entityManager.createQuery(criteria).getSingleResult();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
+
+	public UserEntity findByUserName(String userName) {
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<UserEntity> criteria = builder.createQuery(UserEntity.class);
+		Root<UserEntity> root = criteria.from(UserEntity.class);
+		criteria.select(root).where(builder.equal(root.get("username"), userName));
+		return entityManager.createQuery(criteria).getSingleResult();
+	}
+
+	public Boolean save(UserEntity obj) {
+		try {
+			entityManager.persist(obj);
+			return true;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
+	}
+
+	public Boolean update(UserEntity obj) {
+		try {
+			entityManager.merge(obj);
+			return true;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
+	}
+
+	public Boolean delete(UserEntity obj) {
+		try {
+			entityManager.remove(obj);
+			return true;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
+	}
+
+}

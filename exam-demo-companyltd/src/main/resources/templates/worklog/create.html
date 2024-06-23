@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Work Log Entry</title>
+<link th:href="@{/bootstrap4/bootstrap.css}" rel="stylesheet" />
+</head>
+<body>
+	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+		<a class="navbar-brand" href="#" th:href="@{/}">Home</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarsExampleDefault"
+			aria-controls="navbarsExampleDefault" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+			<ul class="navbar-nav mr-auto">
+			</ul>
+			<ul class="my-2 my-lg-0" sec:authorize="!isAuthenticated()">
+				<li class="nav-item"><a class="navbar-brand" href="#"
+					th:href="@{/login}">Login</a></li>
+			</ul>
+			<ul class="my-2 my-lg-0" sec:authorize="isAuthenticated()">
+				<li class="nav-item"><a class="navbar-brand" href="#"
+					th:href="@{/user/home}">User Profile</a></li>
+			</ul>
+			<ul class="my-2 my-lg-0" sec:authorize="isAuthenticated()">
+				<li class="nav-item"><a class="navbar-brand" href="#"
+					th:href="@{/logout}">Logout</a></li>
+			</ul>
+		</div>
+	</nav>
+	<main role="main">
+		<div class="jumbotron">
+			<div class="container">
+				<h4>Work Log Entry</h4>
+			</div>
+		</div>
+		<div class="container">
+	            <form action="/worklog/save" method="post">
+	
+				<div class="form-group">
+					<label for="fullName">Full Name:</label>
+		<h3 th:text="' '+${currentUser.fullName}"></h3>
+				</div>
+	
+				
+		 <div class="form-group">
+                    <label for="workedHours">Working Hour</label>
+                    <input type="text" class="form-control-file" id="workedHours" name="workedHours">
+                </div>
+                
+                
+				 <div class="form-group">
+                    <label for="hourRate">Hour Rate</label>
+                    <input type="text" class="form-control-file" id="hourRate" name="hourRate">
+                </div>
+                
+                
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+		</div>
+	</main>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Home | Arif Travel Agency</title>
+<link th:href="@{/bootstrap4/bootstrap.css}" rel="stylesheet" />
+</head>
+<body data-new-gr-c-s-check-loaded="14.1018.0" data-gr-ext-installed="">
+	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+		<a class="navbar-brand" href="#" th:href="@{/}">Home</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarsExampleDefault"
+			aria-controls="navbarsExampleDefault" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a class="navbar-brand" href="#"
+					th:href="@{/user-status/create}">User Registration</a></li>
+
+				<li class="nav-item"><a class="navbar-brand" href="#"
+					th:href="@{/login}">Login</a></li>
+
+				<li class="nav-item"><a class="navbar-brand" href="#"
+					th:href="@{/logout}">Logout</a></li>
+			</ul>
+			<form class="form-inline my-2 my-lg-0">
+				<input class="form-control mr-sm-2" type="text" placeholder="Search"
+					aria-label="Search">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			</form>
+		</div>
+	</nav>
+	<main role="main">
+		<!-- Main jumbotron for a primary marketing message or call to action -->
+		<div class="jumbotron">
+			<div class="container">
+				<h2>Welcome to Arif Travel Agency</h2>
+				<a class="btn btn-lg btn-primary" href="/status/create"
+					role="button">Add Status &raquo;</a>
+			</div>
+		</div>
+		<div class="container">
+
+			<form action="#" th:action="@{/user/update}" th:object="${userObj}"
+				method="post">
+				<div class="form-group">
+					<label for="email">User Name:</label> <input class="form-control"
+						type="text" th:field="*{username}" id="name"
+						placeholder="User Name">
+				</div>
+				<div class="form-group">
+					<label for="fullName">Full Name:</label> <input
+						class="form-control" type="text" th:field="*{fullName}"
+						id="fullName" placeholder="Full Name">
+				</div>
+				<div class="form-group">
+					<label for="password">Password:</label> <input class="form-control"
+						type="password" th:field="*{password}" id="password"
+						placeholder="User Name">
+				</div>
+				<input type="hidden" th:field="*{id}" id="id">
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+
+		</div>
+		<!-- /container -->
+	</main>
+</body>
+</html>
