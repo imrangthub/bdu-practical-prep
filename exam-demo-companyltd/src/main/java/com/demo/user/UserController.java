@@ -1,7 +1,9 @@
 package com.demo.user;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,71 +44,86 @@ public class UserController {
 
 	@GetMapping("/user/test-report")
 	public ResponseEntity<byte[]> generateReport() {
+		
+	     try {
+	            // Load the JRXML file
+	 		    InputStream reportStream = new ClassPathResource("reportFile/hello_world.jrxml").getInputStream();
+	            JasperReport jasperReport = JasperCompileManager.compileReport(reportStream);
 
-		try {
+	     
+		        // Set parameters
+		        Map<String, Object> params = new HashMap<>();
+		        
+		        params.put("message", "This is a Simple Message !");
+	            params.put("reportTitle", "Report Header");
+	            params.put("reportBody", "This is Report body");
+	            params.put("reportFooter", "This is Report Footer");
+	            
+	            
+		        // Create a data source with the list of users
+		        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(null);
 
-			// Load the JRXML file
-			InputStream reportStream = new ClassPathResource("reportFile/hello_world.jrxml").getInputStream();
-			JasperReport jasperReport = JasperCompileManager.compileReport(reportStream);
+		        // Fill the report
+		        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, dataSource);
 
-			// Set parameters
-			Map<String, Object> params = new HashMap<>();
-			params.put("message", "This is a Simple Message !");
+	            // Export the report to PDF
+	            byte[] pdfData = JasperExportManager.exportReportToPdf(jasperPrint);
 
-			// Create an empty data source
-			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(null);
+	            // Return the PDF as a response
+	            HttpHeaders headers = new HttpHeaders();
+	            headers.set(HttpHeaders.CONTENT_TYPE, "application/pdf");
+	            headers.set(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=simple-report.pdf");
 
-			// Fill the report
-			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, dataSource);
+	            return new ResponseEntity<>(pdfData, headers, HttpStatus.OK);
 
-			// Export the report to PDF
-			byte[] pdfData = JasperExportManager.exportReportToPdf(jasperPrint);
-
-			// Return the PDF as a response
-			HttpHeaders headers = new HttpHeaders();
-			headers.set(HttpHeaders.CONTENT_TYPE, "application/pdf");
-			headers.set(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=hello_world.pdf");
-
-			return new ResponseEntity<>(pdfData, headers, HttpStatus.OK);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	        }
+	     
+	     
 	}
+	
+
 
 	@GetMapping("/user/report-user-list")
 	public ResponseEntity<byte[]> generateUserListReport() {
 
-		try {
-			// Load the JRXML file
-			InputStream reportStream = new ClassPathResource("reportFile/userListReport.jrxml").getInputStream();
-			JasperReport jasperReport = JasperCompileManager.compileReport(reportStream);
+	    try {
+	        // Load the JRXML file
+	        InputStream reportStream = new ClassPathResource("reportFile/userListReport.jrxml").getInputStream();
+	        JasperReport jasperReport = JasperCompileManager.compileReport(reportStream);
 
-			// Set parameters
-			Map<String, Object> params = new HashMap<>();
-			params.put("message", "This is a Simple Message !");
+	        // Create a list of users
+	        List<UserEntity> users = new ArrayList<>();
+	        
+	        users = userService.findAll();
 
-			// Create an empty data source
-			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(null);
 
-			// Fill the report
-			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, dataSource);
+	        // Set parameters
+	        Map<String, Object> params = new HashMap<>();
+	        params.put("message", "This is a Simple Message !");
 
-			// Export the report to PDF
-			byte[] pdfData = JasperExportManager.exportReportToPdf(jasperPrint);
+	        // Create a data source with the list of users
+	        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(users);
 
-			// Return the PDF as a response
-			HttpHeaders headers = new HttpHeaders();
-			headers.set(HttpHeaders.CONTENT_TYPE, "application/pdf");
-			headers.set(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=user-list.pdf");
+	        // Fill the report
+	        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, dataSource);
 
-			return new ResponseEntity<>(pdfData, headers, HttpStatus.OK);
+	        // Export the report to PDF
+	        byte[] pdfData = JasperExportManager.exportReportToPdf(jasperPrint);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+	        // Return the PDF as a response
+	        HttpHeaders headers = new HttpHeaders();
+	        headers.set(HttpHeaders.CONTENT_TYPE, "application/pdf");
+	        headers.set(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=user-list.pdf");
+
+	        return new ResponseEntity<>(pdfData, headers, HttpStatus.OK);
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	    }
 	}
 
 }

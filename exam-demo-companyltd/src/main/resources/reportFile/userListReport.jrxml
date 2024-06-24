@@ -1,97 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 7.0.0.final using JasperReports Library version 6.4.0  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="userListReport" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="495" leftMargin="50" rightMargin="50" topMargin="20" bottomMargin="20" uuid="6b4d9be1-3fae-4115-b1bf-ed72b864fab2">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
-	<property name="com.jaspersoft.studio.unit." value="pixel"/>
-	<queryString>
-		<![CDATA[]]>
-	</queryString>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="userListReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6b4d9be1-3fae-4115-b1bf-ed72b864fab2">
+	<field name="id" class="java.lang.Long"/>
+	<field name="fullName" class="java.lang.String"/>
+	<field name="username" class="java.lang.String"/>
 	<title>
-		<band height="206" splitType="Stretch">
-			<rectangle>
-				<reportElement x="0" y="98" width="495" height="70" backcolor="rgba(255, 255, 255, 0.0)" uuid="fb47fb8f-b1c7-4607-80c8-4d20c1106886"/>
-			</rectangle>
-			<staticText>
-				<reportElement x="0" y="99" width="90" height="15" uuid="de71123d-0fe9-4b75-b8b3-79d5546759bc"/>
+		<band height="50">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="30" uuid="c969c4e6-7883-4d2f-b73e-cf7fa7862a99"/>
 				<textElement>
-					<paragraph leftIndent="5"/>
+					<font size="20"/>
 				</textElement>
-				<text><![CDATA[Invoice No :]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="117" width="89" height="15" uuid="3dc2299f-5393-44aa-9f90-1697397ee66d"/>
-				<textElement>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<text><![CDATA[Customer Name :]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="133" y="99" width="90" height="15" uuid="c2c93d6f-2f82-46d3-9337-9578afae0fab"/>
-				<textElement>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<text><![CDATA[Invoice Date :]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="249" y="99" width="90" height="15" uuid="b43d704a-a283-41ed-84dc-f0d3eef964c1"/>
-				<textElement>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<text><![CDATA[Delivery Date :]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="380" y="99" width="90" height="15" uuid="a77444b4-d455-4410-a50c-d6281e8f4f04"/>
-				<textElement>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<text><![CDATA[Report No :]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="380" y="117" width="90" height="15" uuid="f1a8830d-0133-45bd-91ec-f07b981ec0aa"/>
-				<textElement>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<text><![CDATA[Gender   :]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="172" y="67" width="181" height="30" uuid="52f3c517-73d0-4b43-819b-6cd3b7998230"/>
-				<textElement textAlignment="Center" verticalAlignment="Top">
-					<font size="16"/>
-				</textElement>
-				<text><![CDATA[Simple Report]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="285" y="115" width="59" height="15" uuid="eac2ba92-3386-4d7f-8b89-1422274fa7e7"/>
-				<textElement>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<text><![CDATA[Age   :]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA["User List"]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
-	<detail>
-		<band height="407" splitType="Stretch"/>
-	</detail>
-	<pageFooter>
-		<band height="41" splitType="Stretch">
+	<columnHeader>
+		<band height="20">
 			<staticText>
-				<reportElement x="0" y="0" width="90" height="15" uuid="bb7db28d-e791-4e86-8bb4-cbcef753da33"/>
-				<textElement>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<text><![CDATA[Prepared By :]]></text>
+				<reportElement x="0" y="0" width="100" height="20" uuid="acde9483-7033-4958-a60f-ff7ca6af2a08"/>
+				<text><![CDATA[ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="15" width="133" height="15" uuid="55f16504-0b92-4868-95dc-656df6af71d1"/>
-				<textElement>
-					<font isBold="true"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<text><![CDATA[simple@test.com]]></text>
+				<reportElement x="100" y="0" width="200" height="20" uuid="ba0190d6-ccde-4346-bd01-98ce49027863"/>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="200" height="20" uuid="38c38aa4-8319-4412-849e-6791fe2b2c2f"/>
+				<text><![CDATA[User name]]></text>
 			</staticText>
 		</band>
-	</pageFooter>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="bffd3d6d-76c8-4937-8d4d-7e04ad81a60e"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="200" height="20" uuid="8f3b9d30-265c-4468-bef5-d29653f3bf10"/>
+				<textFieldExpression><![CDATA[$F{fullName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="200" height="20" uuid="b6f2acbe-4c68-48d6-9f4e-3c72b19c94ff"/>
+				<textFieldExpression><![CDATA[$F{username}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
 </jasperReport>

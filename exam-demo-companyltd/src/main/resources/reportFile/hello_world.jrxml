@@ -18,10 +18,10 @@
 				<textElement textAlignment="Center">
 					<font size="16" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Hello World]]></text>
+				<text><![CDATA[Hello World4]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="50" y="60" width="328" height="43" uuid="85129b86-4bc2-4f9d-8e5e-2b9a7f7d93c5"/>
+				<reportElement x="70" y="80" width="328" height="43" uuid="35163317-6327-4463-86c4-d41c38eb9479"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="16" isBold="true"/>
 				</textElement>
@@ -30,9 +30,39 @@
 		</band>
 	</title>
 	<detail>
-		<band height="407" splitType="Stretch"/>
+		<band height="230" splitType="Stretch">
+			<textField>
+				<reportElement x="80" y="0" width="328" height="43" uuid="85129b86-4bc2-4f9d-8e5e-2b9a7f7d93c5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{message}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="125" y="150" width="315" height="50" uuid="3f2f9fcd-3ee2-448c-a629-30125d3afa49"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{message}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="70" width="218" height="50" uuid="863f19e8-2eb9-4836-9fba-44af57a4bee5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{message}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
 	<pageFooter>
-		<band height="41" splitType="Stretch"/>
+		<band height="41" splitType="Stretch">
+			<textField>
+				<reportElement x="100" y="10" width="260" height="26" uuid="27349c1c-4f66-42b1-986c-ded47a1fe7cc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{message}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageFooter>
 </jasperReport>
