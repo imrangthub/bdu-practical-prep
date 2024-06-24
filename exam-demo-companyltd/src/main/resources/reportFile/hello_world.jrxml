@@ -4,53 +4,50 @@
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<parameter name="message" class="java.lang.String"/>
+	<parameter name="reportTitle" class="java.lang.String"/>
+	<parameter name="reportFooter" class="java.lang.String"/>
+	<parameter name="reportBody" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
-	<field name="message" class="java.lang.String"/>
+	<field name="data1" class="java.lang.String"/>
+	<field name="data2" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="150" splitType="Stretch">
 			<staticText>
-				<reportElement x="120" y="20" width="175" height="30" uuid="bfba6b18-f4c1-4a4f-a348-3a0e2c253e9d"/>
+				<reportElement x="143" y="0" width="175" height="30" uuid="bfba6b18-f4c1-4a4f-a348-3a0e2c253e9d"/>
 				<textElement textAlignment="Center">
 					<font size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Hello World4]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="70" y="80" width="328" height="43" uuid="35163317-6327-4463-86c4-d41c38eb9479"/>
+				<reportElement x="66" y="40" width="328" height="43" uuid="35163317-6327-4463-86c4-d41c38eb9479"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="16" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{message}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{reportTitle}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
 	<detail>
-		<band height="230" splitType="Stretch">
+		<band height="194">
 			<textField>
-				<reportElement x="80" y="0" width="328" height="43" uuid="85129b86-4bc2-4f9d-8e5e-2b9a7f7d93c5"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="16" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{message}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="125" y="150" width="315" height="50" uuid="3f2f9fcd-3ee2-448c-a629-30125d3afa49"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="0" y="0" width="250" height="30" uuid="286331c4-86e7-4851-90c8-75f21162d849"/>
+				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{message}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{data1}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="180" y="70" width="218" height="50" uuid="863f19e8-2eb9-4836-9fba-44af57a4bee5"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="250" y="0" width="240" height="30" uuid="419f4938-865a-4894-835c-e85dd25de07c"/>
+				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{message}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{data2}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -61,7 +58,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="16" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{message}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{reportFooter}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>

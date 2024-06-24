@@ -15,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.demo.base.BaseReportData;
+
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -44,86 +46,81 @@ public class UserController {
 
 	@GetMapping("/user/test-report")
 	public ResponseEntity<byte[]> generateReport() {
-		
-	     try {
-	            // Load the JRXML file
-	 		    InputStream reportStream = new ClassPathResource("reportFile/hello_world.jrxml").getInputStream();
-	            JasperReport jasperReport = JasperCompileManager.compileReport(reportStream);
 
-	     
-		        // Set parameters
-		        Map<String, Object> params = new HashMap<>();
-		        
-		        params.put("message", "This is a Simple Message !");
-	            params.put("reportTitle", "Report Header");
-	            params.put("reportBody", "This is Report body");
-	            params.put("reportFooter", "This is Report Footer");
-	            
-	            
-		        // Create a data source with the list of users
-		        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(null);
+		try {
+			// Load the JRXML file
+			InputStream reportStream = new ClassPathResource("reportFile/hello_world.jrxml").getInputStream();
+			JasperReport jasperReport = JasperCompileManager.compileReport(reportStream);
 
-		        // Fill the report
-		        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, dataSource);
+			// Set parameters
+			Map<String, Object> params = new HashMap<>();
+			params.put("reportTitle", "Report Header");
+			params.put("reportFooter", "This is Report Footer");
 
-	            // Export the report to PDF
-	            byte[] pdfData = JasperExportManager.exportReportToPdf(jasperPrint);
+			List<BaseReportData> dataList = new ArrayList<>();
+			BaseReportData obj1 = new BaseReportData("Data1", "Data2");
+			dataList.add(obj1);
 
-	            // Return the PDF as a response
-	            HttpHeaders headers = new HttpHeaders();
-	            headers.set(HttpHeaders.CONTENT_TYPE, "application/pdf");
-	            headers.set(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=simple-report.pdf");
+			// Create a data source with the list of users
+			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(dataList);
 
-	            return new ResponseEntity<>(pdfData, headers, HttpStatus.OK);
+			// Fill the report
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, dataSource);
 
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-	        }
-	     
-	     
+			// Export the report to PDF
+			byte[] pdfData = JasperExportManager.exportReportToPdf(jasperPrint);
+
+			// Return the PDF as a response
+			HttpHeaders headers = new HttpHeaders();
+			headers.set(HttpHeaders.CONTENT_TYPE, "application/pdf");
+			headers.set(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=simple-report.pdf");
+
+			return new ResponseEntity<>(pdfData, headers, HttpStatus.OK);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
 	}
-	
-
 
 	@GetMapping("/user/report-user-list")
 	public ResponseEntity<byte[]> generateUserListReport() {
 
-	    try {
-	        // Load the JRXML file
-	        InputStream reportStream = new ClassPathResource("reportFile/userListReport.jrxml").getInputStream();
-	        JasperReport jasperReport = JasperCompileManager.compileReport(reportStream);
+		try {
+			// Load the JRXML file
+			InputStream reportStream = new ClassPathResource("reportFile/userListReport.jrxml").getInputStream();
+			JasperReport jasperReport = JasperCompileManager.compileReport(reportStream);
 
-	        // Create a list of users
-	        List<UserEntity> users = new ArrayList<>();
-	        
-	        users = userService.findAll();
+			// Create a list of users
+			List<UserEntity> users = new ArrayList<>();
 
+			users = userService.findAll();
 
-	        // Set parameters
-	        Map<String, Object> params = new HashMap<>();
-	        params.put("message", "This is a Simple Message !");
+			// Set parameters
+			Map<String, Object> params = new HashMap<>();
+			params.put("message", "This is a Simple Message !");
 
-	        // Create a data source with the list of users
-	        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(users);
+			// Create a data source with the list of users
+			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(users);
 
-	        // Fill the report
-	        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, dataSource);
+			// Fill the report
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, dataSource);
 
-	        // Export the report to PDF
-	        byte[] pdfData = JasperExportManager.exportReportToPdf(jasperPrint);
+			// Export the report to PDF
+			byte[] pdfData = JasperExportManager.exportReportToPdf(jasperPrint);
 
-	        // Return the PDF as a response
-	        HttpHeaders headers = new HttpHeaders();
-	        headers.set(HttpHeaders.CONTENT_TYPE, "application/pdf");
-	        headers.set(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=user-list.pdf");
+			// Return the PDF as a response
+			HttpHeaders headers = new HttpHeaders();
+			headers.set(HttpHeaders.CONTENT_TYPE, "application/pdf");
+			headers.set(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=user-list.pdf");
 
-	        return new ResponseEntity<>(pdfData, headers, HttpStatus.OK);
+			return new ResponseEntity<>(pdfData, headers, HttpStatus.OK);
 
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-	    }
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 }
